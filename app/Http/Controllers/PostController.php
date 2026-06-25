@@ -24,9 +24,8 @@ class PostController extends Controller
      */
     public function edit(Request $request, string $id = "")
     {
-        // return view('edit', [])
-        // Post::where('id', $id)->update([])
-        // Post::where('id', 1)->update(['title'=> 'New Title']);
+        $post = Post::find($id);
+        return view('/forms/edit', ['post' => $post]);
     }
     /**
      * Show the form for creating a new resource.
@@ -41,11 +40,21 @@ class PostController extends Controller
      */
     public function save(Request $request)
     {
-        //
-        $post = new Post();
-        // Example: $post = Post::find(1); $post->title =
-// 'Updated'; $post->save();
-// or    // Post::where('id', 1)->update(['title'=> 'New Title']);
+        $data = $request->validate([
+            'title'   => 'required|max:50',
+            'content' => 'required',
+        ]);
+
+        // If an id came through, update that post; otherwise create a new one.
+        $post = $request->filled('id')
+            ? Post::find($request->input('id'))
+            : new Post();
+
+        $post->title   = $data['title'];
+        $post->content = $data['content'];
+        $post->save();
+
+        return redirect('/all');
     }
 
 
