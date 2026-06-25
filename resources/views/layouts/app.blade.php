@@ -31,20 +31,19 @@
                         <a class="nav-link" href="/">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">All Posts</a>
+                        <a class="nav-link" href="all">All Posts</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    {{-- Page Content --}}
+    {{-- Pa Content --}}
     <main class="py-4">
         <div class="container">
             @yield('content')
         </div>
     </main>
-
 
     <footer class="text-center text-muted py-3 border-top">
         <small>&copy; {{ now()->year }} Assignment 1 COSC360/COSC560</small>

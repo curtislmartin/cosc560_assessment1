@@ -10,5 +10,5 @@ class Post extends Model
     use HasFactory;
 
     /** Mass assignable */
-    protected $fillable = ["title", "content"];
+    protected $fillable = ["title", "content", "is_active"];
 }
