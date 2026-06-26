@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\Types\Null_;
-
-use function Laravel\Prompts\title;
 
 class PostController extends Controller
 {
@@ -22,7 +19,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request, string $id = "")
+    public function edit(string $id)
     {
         $post = Post::find($id);
         return view('/forms/edit', ['post' => $post]);
@@ -32,7 +29,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('/forms/create');
     }
 
     /**
@@ -65,7 +62,12 @@ class PostController extends Controller
     public function delete(string $id)
     {
         $post = Post::find($id);
-        $post->delete();
+
+        if ($post) {
+            $post->delete();
+        }
+
+        return redirect('/all');
     }
 }
 
